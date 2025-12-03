@@ -73,16 +73,17 @@ const handleAutoRotate = (enabled: boolean) => {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #000000;
   overflow: hidden;
 }
 
 .app-header {
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(20, 20, 20, 0.95);
   backdrop-filter: blur(10px);
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
   padding: 16px 24px;
   z-index: 100;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .header-content {
@@ -93,7 +94,7 @@ const handleAutoRotate = (enabled: boolean) => {
 .app-title {
   margin: 0;
   font-size: 28px;
-  color: #303133;
+  color: #ffffff;
   display: flex;
   align-items: center;
   gap: 12px;
@@ -107,7 +108,7 @@ const handleAutoRotate = (enabled: boolean) => {
 .app-subtitle {
   margin: 4px 0 0 44px;
   font-size: 14px;
-  color: #909399;
+  color: #b0b0b0;
   font-weight: 400;
 }
 
@@ -132,8 +133,9 @@ const handleAutoRotate = (enabled: boolean) => {
   position: relative;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-  background: white;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  background: #000000;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .mobile-hint {

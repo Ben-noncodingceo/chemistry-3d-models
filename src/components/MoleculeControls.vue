@@ -127,14 +127,15 @@ const handleAutoRotate = () => {
   width: 300px;
   max-height: calc(100vh - 40px);
   overflow-y: auto;
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(20, 20, 20, 0.95);
   backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .controls-panel h3 {
   margin: 0;
   font-size: 18px;
-  color: #303133;
+  color: #ffffff;
 }
 
 .controls-content {
@@ -151,7 +152,7 @@ const handleAutoRotate = () => {
 
 .section-label {
   font-weight: 600;
-  color: #606266;
+  color: #b0b0b0;
   font-size: 14px;
   margin-bottom: 4px;
 }
@@ -181,7 +182,7 @@ const handleAutoRotate = () => {
 }
 
 :deep(.el-switch__label) {
-  color: #606266;
+  color: #b0b0b0;
   font-weight: 500;
 }
 
@@ -189,6 +190,15 @@ const handleAutoRotate = () => {
   display: flex;
   align-items: center;
   margin-bottom: 8px;
+}
+
+:deep(.el-radio__label) {
+  color: #e0e0e0;
+}
+
+:deep(.el-radio__input.is-checked .el-radio__inner) {
+  background-color: #409eff;
+  border-color: #409eff;
 }
 
 .button-group {
@@ -204,9 +214,46 @@ const handleAutoRotate = () => {
 :deep(.el-card__header) {
   padding: 16px 20px;
   border-bottom: 2px solid #409eff;
+  background: rgba(30, 30, 30, 0.8);
+}
+
+:deep(.el-card__body) {
+  background: rgba(20, 20, 20, 0.6);
+  color: #e0e0e0;
 }
 
 :deep(.el-divider) {
   margin: 16px 0;
+  border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+:deep(.el-select) {
+  --el-select-input-color: #e0e0e0;
+  --el-select-input-focus-border-color: #409eff;
+  --el-fill-color-blank: rgba(40, 40, 40, 0.9);
+}
+
+:deep(.el-input__wrapper) {
+  background-color: rgba(40, 40, 40, 0.9);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: none;
+}
+
+:deep(.el-input__inner) {
+  color: #e0e0e0;
+}
+
+:deep(.el-button) {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+:deep(.el-button--default) {
+  background-color: rgba(60, 60, 60, 0.8);
+  color: #e0e0e0;
+}
+
+:deep(.el-button--default:hover) {
+  background-color: rgba(80, 80, 80, 0.9);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 </style>

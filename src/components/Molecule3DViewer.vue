@@ -25,7 +25,7 @@ const initScene = () => {
 
   // 创建场景
   scene = new THREE.Scene()
-  scene.background = new THREE.Color(0xf5f5f5)
+  scene.background = new THREE.Color(0x000000)
 
   // 创建相机
   const width = containerRef.value.clientWidth
@@ -47,6 +47,8 @@ const initScene = () => {
   controls.minDistance = 3
   controls.maxDistance = 50
   controls.enablePan = true
+  controls.autoRotate = true
+  controls.autoRotateSpeed = 0.5
 
   // 添加光源
   const ambientLight = new THREE.AmbientLight(0xffffff, 0.6)
@@ -59,11 +61,6 @@ const initScene = () => {
   const directionalLight2 = new THREE.DirectionalLight(0xffffff, 0.4)
   directionalLight2.position.set(-5, -5, -5)
   scene.add(directionalLight2)
-
-  // 添加网格辅助
-  const gridHelper = new THREE.GridHelper(20, 20, 0xcccccc, 0xeeeeee)
-  gridHelper.position.y = -5
-  scene.add(gridHelper)
 
   // 启动动画循环
   animate()
