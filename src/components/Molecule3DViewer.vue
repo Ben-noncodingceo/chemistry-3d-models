@@ -110,19 +110,49 @@ const addLonePairVisualization = () => {
   const centerAtom = moleculeStore.currentMolecule.atoms[0] // 假设中心原子是第一个
   const lonePairs = moleculeStore.currentMolecule.vsepr.lonePairs
 
-  // 根据分子几何结构确定孤对电子的位置
-  if (moleculeStore.currentMolecule.id === 2) { // 氨 NH3
-    const direction = new THREE.Vector3(0, 1, 0.5)
+  // 根据分子ID和几何结构确定孤对电子的位置
+  const moleculeId = moleculeStore.currentMolecule.id
+
+  if (moleculeId === 2) { // 氨 NH3 - 1对孤对电子
+    const direction = new THREE.Vector3(0, -1, 0.5)
     const lonePair = createLonePairMesh(centerAtom, direction, 1.2)
     moleculeGroup.add(lonePair)
-  } else if (moleculeStore.currentMolecule.id === 3) { // 水 H2O
-    // 水有2对孤对电子
+  } else if (moleculeId === 3) { // 水 H2O - 2对孤对电子
     const direction1 = new THREE.Vector3(-0.5, -1, 0)
     const direction2 = new THREE.Vector3(0.5, -1, 0)
     const lonePair1 = createLonePairMesh(centerAtom, direction1, 1.0)
     const lonePair2 = createLonePairMesh(centerAtom, direction2, 1.0)
     moleculeGroup.add(lonePair1)
     moleculeGroup.add(lonePair2)
+  } else if (moleculeId === 11) { // SO2 - 1对孤对电子
+    const direction = new THREE.Vector3(0, -1, 0)
+    const lonePair = createLonePairMesh(centerAtom, direction, 1.3)
+    moleculeGroup.add(lonePair)
+  } else if (moleculeId === 13) { // ClF3 - 2对孤对电子
+    const direction1 = new THREE.Vector3(0, 1, 0)
+    const direction2 = new THREE.Vector3(0, -1, 0)
+    const lonePair1 = createLonePairMesh(centerAtom, direction1, 1.4)
+    const lonePair2 = createLonePairMesh(centerAtom, direction2, 1.4)
+    moleculeGroup.add(lonePair1)
+    moleculeGroup.add(lonePair2)
+  } else if (moleculeId === 14) { // XeF4 - 2对孤对电子
+    const direction1 = new THREE.Vector3(0, 0, 1)
+    const direction2 = new THREE.Vector3(0, 0, -1)
+    const lonePair1 = createLonePairMesh(centerAtom, direction1, 1.5)
+    const lonePair2 = createLonePairMesh(centerAtom, direction2, 1.5)
+    moleculeGroup.add(lonePair1)
+    moleculeGroup.add(lonePair2)
+  } else if (moleculeId === 16) { // H2S - 2对孤对电子
+    const direction1 = new THREE.Vector3(-0.5, -1, 0)
+    const direction2 = new THREE.Vector3(0.5, -1, 0)
+    const lonePair1 = createLonePairMesh(centerAtom, direction1, 1.2)
+    const lonePair2 = createLonePairMesh(centerAtom, direction2, 1.2)
+    moleculeGroup.add(lonePair1)
+    moleculeGroup.add(lonePair2)
+  } else if (moleculeId === 17) { // PH3 - 1对孤对电子
+    const direction = new THREE.Vector3(0, -1, 0.5)
+    const lonePair = createLonePairMesh(centerAtom, direction, 1.3)
+    moleculeGroup.add(lonePair)
   }
 }
 
