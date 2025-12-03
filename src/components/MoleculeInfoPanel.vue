@@ -103,7 +103,7 @@ const molecule = computed(() => moleculeStore.currentMolecule)
 
 .name-en {
   font-size: 14px;
-  color: #909399;
+  color: #aaaaaa;
   font-style: italic;
 }
 
@@ -120,13 +120,13 @@ const molecule = computed(() => moleculeStore.currentMolecule)
 
 .info-item label {
   font-weight: 600;
-  color: #b0b0b0;
+  color: #cccccc;
   min-width: 100px;
   flex-shrink: 0;
 }
 
 .info-item .value {
-  color: #e0e0e0;
+  color: #ffffff;
   font-weight: 500;
 }
 
@@ -140,7 +140,7 @@ const molecule = computed(() => moleculeStore.currentMolecule)
 }
 
 .description {
-  color: #b0b0b0;
+  color: #cccccc;
   line-height: 1.8;
   text-align: justify;
   margin: 0;
@@ -148,7 +148,7 @@ const molecule = computed(() => moleculeStore.currentMolecule)
   background: rgba(40, 40, 40, 0.6);
   border-radius: 4px;
   font-size: 13px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .bond-lengths {
@@ -164,16 +164,17 @@ const molecule = computed(() => moleculeStore.currentMolecule)
 
 .bond-name {
   font-weight: 500;
-  color: #b0b0b0;
+  color: #cccccc;
 }
 
 .bond-value {
-  color: #e0e0e0;
+  color: #ffffff;
 }
 
 :deep(.el-divider__text) {
   font-weight: 600;
   color: #409eff;
+  background-color: rgba(20, 20, 20, 0.95);
 }
 
 :deep(.el-card__header) {
@@ -182,12 +183,7 @@ const molecule = computed(() => moleculeStore.currentMolecule)
   background: rgba(30, 30, 30, 0.8);
 }
 
-:deep(.el-card__body) {
-  background: rgba(20, 20, 20, 0.6);
-  color: #e0e0e0;
-}
-
 :deep(.el-divider) {
-  border-top-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.1);
 }
 </style>

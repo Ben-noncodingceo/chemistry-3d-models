@@ -91,7 +91,7 @@ const currentMoleculeId = ref(moleculeStore.currentMoleculeId)
 const showLonePairs = ref(moleculeStore.showLonePairs)
 const showBondAngles = ref(moleculeStore.showBondAngles)
 const renderMode = ref(moleculeStore.renderMode)
-const autoRotate = ref(false)
+const autoRotate = ref(true) // 默认开启自动旋转
 
 // 定义 emits
 const emit = defineEmits<{
@@ -152,7 +152,7 @@ const handleAutoRotate = () => {
 
 .section-label {
   font-weight: 600;
-  color: #b0b0b0;
+  color: #cccccc;
   font-size: 14px;
   margin-bottom: 4px;
 }
@@ -182,7 +182,7 @@ const handleAutoRotate = () => {
 }
 
 :deep(.el-switch__label) {
-  color: #b0b0b0;
+  color: #cccccc;
   font-weight: 500;
 }
 
@@ -193,12 +193,7 @@ const handleAutoRotate = () => {
 }
 
 :deep(.el-radio__label) {
-  color: #e0e0e0;
-}
-
-:deep(.el-radio__input.is-checked .el-radio__inner) {
-  background-color: #409eff;
-  border-color: #409eff;
+  color: #cccccc;
 }
 
 .button-group {
@@ -217,43 +212,13 @@ const handleAutoRotate = () => {
   background: rgba(30, 30, 30, 0.8);
 }
 
-:deep(.el-card__body) {
-  background: rgba(20, 20, 20, 0.6);
-  color: #e0e0e0;
-}
-
 :deep(.el-divider) {
   margin: 16px 0;
-  border-top-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.1);
 }
 
-:deep(.el-select) {
-  --el-select-input-color: #e0e0e0;
-  --el-select-input-focus-border-color: #409eff;
-  --el-fill-color-blank: rgba(40, 40, 40, 0.9);
-}
-
-:deep(.el-input__wrapper) {
-  background-color: rgba(40, 40, 40, 0.9);
-  border-color: rgba(255, 255, 255, 0.2);
-  box-shadow: none;
-}
-
-:deep(.el-input__inner) {
-  color: #e0e0e0;
-}
-
-:deep(.el-button) {
-  border-color: rgba(255, 255, 255, 0.2);
-}
-
-:deep(.el-button--default) {
-  background-color: rgba(60, 60, 60, 0.8);
-  color: #e0e0e0;
-}
-
-:deep(.el-button--default:hover) {
-  background-color: rgba(80, 80, 80, 0.9);
-  border-color: rgba(255, 255, 255, 0.3);
+:deep(.el-divider__text) {
+  background-color: rgba(20, 20, 20, 0.95);
+  color: #409eff;
 }
 </style>

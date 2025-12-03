@@ -43,7 +43,7 @@ const commonElements: LegendElement[] = [
   backdrop-filter: blur(10px);
   padding: 16px;
   border-radius: 8px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 2px 12px rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
   min-width: 200px;
 }
@@ -73,6 +73,7 @@ const commonElements: LegendElement[] = [
   border-radius: 50%;
   border: 1px solid rgba(255, 255, 255, 0.2);
   flex-shrink: 0;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
 }
 
 .element-symbol {
@@ -84,7 +85,7 @@ const commonElements: LegendElement[] = [
 
 .element-name {
   font-size: 12px;
-  color: #b0b0b0;
+  color: #cccccc;
 }
 
 @media (max-width: 768px) {
