@@ -39,18 +39,19 @@ const commonElements: LegendElement[] = [
   position: absolute;
   bottom: 20px;
   right: 20px;
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(20, 20, 20, 0.95);
   backdrop-filter: blur(10px);
   padding: 16px;
   border-radius: 8px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 12px rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   min-width: 200px;
 }
 
 .legend-panel h4 {
   margin: 0 0 12px 0;
   font-size: 14px;
-  color: #303133;
+  color: #ffffff;
   font-weight: 600;
 }
 
@@ -70,20 +71,21 @@ const commonElements: LegendElement[] = [
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  border: 1px solid #dcdfe6;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   flex-shrink: 0;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
 }
 
 .element-symbol {
   font-weight: 600;
   font-size: 13px;
-  color: #303133;
+  color: #ffffff;
   min-width: 20px;
 }
 
 .element-name {
   font-size: 12px;
-  color: #606266;
+  color: #cccccc;
 }
 
 @media (max-width: 768px) {

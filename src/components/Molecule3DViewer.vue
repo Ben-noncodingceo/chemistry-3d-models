@@ -18,6 +18,7 @@ let renderer: THREE.WebGLRenderer
 let controls: OrbitControls
 let moleculeGroup: THREE.Group | null = null
 let animationId: number
+let autoRotateEnabled = ref(true) // 默认开启自动旋转
 
 // 初始化Three.js场景
 const initScene = () => {
@@ -25,7 +26,7 @@ const initScene = () => {
 
   // 创建场景
   scene = new THREE.Scene()
-  scene.background = new THREE.Color(0xf5f5f5)
+  scene.background = new THREE.Color(0x000000) // 纯黑色背景
 
   // 创建相机
   const width = containerRef.value.clientWidth
@@ -47,6 +48,8 @@ const initScene = () => {
   controls.minDistance = 3
   controls.maxDistance = 50
   controls.enablePan = true
+  controls.autoRotate = true // 启用自动旋转
+  controls.autoRotateSpeed = 0.5 // 1分钟转一圈：360度/60秒 ≈ 6度/秒，OrbitControls的速度参数约为0.5
 
   // 添加光源
   const ambientLight = new THREE.AmbientLight(0xffffff, 0.6)
@@ -59,11 +62,6 @@ const initScene = () => {
   const directionalLight2 = new THREE.DirectionalLight(0xffffff, 0.4)
   directionalLight2.position.set(-5, -5, -5)
   scene.add(directionalLight2)
-
-  // 添加网格辅助
-  const gridHelper = new THREE.GridHelper(20, 20, 0xcccccc, 0xeeeeee)
-  gridHelper.position.y = -5
-  scene.add(gridHelper)
 
   // 启动动画循环
   animate()
@@ -110,19 +108,49 @@ const addLonePairVisualization = () => {
   const centerAtom = moleculeStore.currentMolecule.atoms[0] // 假设中心原子是第一个
   const lonePairs = moleculeStore.currentMolecule.vsepr.lonePairs
 
-  // 根据分子几何结构确定孤对电子的位置
-  if (moleculeStore.currentMolecule.id === 2) { // 氨 NH3
-    const direction = new THREE.Vector3(0, 1, 0.5)
+  // 根据分子ID和几何结构确定孤对电子的位置
+  const moleculeId = moleculeStore.currentMolecule.id
+
+  if (moleculeId === 2) { // 氨 NH3 - 1对孤对电子
+    const direction = new THREE.Vector3(0, -1, 0.5)
     const lonePair = createLonePairMesh(centerAtom, direction, 1.2)
     moleculeGroup.add(lonePair)
-  } else if (moleculeStore.currentMolecule.id === 3) { // 水 H2O
-    // 水有2对孤对电子
+  } else if (moleculeId === 3) { // 水 H2O - 2对孤对电子
     const direction1 = new THREE.Vector3(-0.5, -1, 0)
     const direction2 = new THREE.Vector3(0.5, -1, 0)
     const lonePair1 = createLonePairMesh(centerAtom, direction1, 1.0)
     const lonePair2 = createLonePairMesh(centerAtom, direction2, 1.0)
     moleculeGroup.add(lonePair1)
     moleculeGroup.add(lonePair2)
+  } else if (moleculeId === 11) { // SO2 - 1对孤对电子
+    const direction = new THREE.Vector3(0, -1, 0)
+    const lonePair = createLonePairMesh(centerAtom, direction, 1.3)
+    moleculeGroup.add(lonePair)
+  } else if (moleculeId === 13) { // ClF3 - 2对孤对电子
+    const direction1 = new THREE.Vector3(0, 1, 0)
+    const direction2 = new THREE.Vector3(0, -1, 0)
+    const lonePair1 = createLonePairMesh(centerAtom, direction1, 1.4)
+    const lonePair2 = createLonePairMesh(centerAtom, direction2, 1.4)
+    moleculeGroup.add(lonePair1)
+    moleculeGroup.add(lonePair2)
+  } else if (moleculeId === 14) { // XeF4 - 2对孤对电子
+    const direction1 = new THREE.Vector3(0, 0, 1)
+    const direction2 = new THREE.Vector3(0, 0, -1)
+    const lonePair1 = createLonePairMesh(centerAtom, direction1, 1.5)
+    const lonePair2 = createLonePairMesh(centerAtom, direction2, 1.5)
+    moleculeGroup.add(lonePair1)
+    moleculeGroup.add(lonePair2)
+  } else if (moleculeId === 16) { // H2S - 2对孤对电子
+    const direction1 = new THREE.Vector3(-0.5, -1, 0)
+    const direction2 = new THREE.Vector3(0.5, -1, 0)
+    const lonePair1 = createLonePairMesh(centerAtom, direction1, 1.2)
+    const lonePair2 = createLonePairMesh(centerAtom, direction2, 1.2)
+    moleculeGroup.add(lonePair1)
+    moleculeGroup.add(lonePair2)
+  } else if (moleculeId === 17) { // PH3 - 1对孤对电子
+    const direction = new THREE.Vector3(0, -1, 0.5)
+    const lonePair = createLonePairMesh(centerAtom, direction, 1.3)
+    moleculeGroup.add(lonePair)
   }
 }
 
@@ -186,7 +214,15 @@ watch(
   }
 )
 
-// 暴露重置视角方法
+// 设置自动旋转
+const setAutoRotate = (enabled: boolean) => {
+  autoRotateEnabled.value = enabled
+  if (controls) {
+    controls.autoRotate = enabled
+  }
+}
+
+// 暴露方法
 defineExpose({
   resetView: () => {
     if (moleculeStore.currentMolecule) {
@@ -196,7 +232,8 @@ defineExpose({
       controls.target.set(0, 0, 0)
       controls.update()
     }
-  }
+  },
+  setAutoRotate
 })
 </script>
 
