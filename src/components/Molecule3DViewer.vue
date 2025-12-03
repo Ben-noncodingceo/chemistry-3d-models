@@ -18,7 +18,6 @@ let renderer: THREE.WebGLRenderer
 let controls: OrbitControls
 let moleculeGroup: THREE.Group | null = null
 let animationId: number
-let autoRotateEnabled = ref(true) // 默认开启自动旋转
 
 // 初始化Three.js场景
 const initScene = () => {
@@ -216,7 +215,6 @@ watch(
 
 // 设置自动旋转
 const setAutoRotate = (enabled: boolean) => {
-  autoRotateEnabled.value = enabled
   if (controls) {
     controls.autoRotate = enabled
   }
