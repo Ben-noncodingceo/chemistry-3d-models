@@ -91,7 +91,7 @@ const currentMoleculeId = ref(moleculeStore.currentMoleculeId)
 const showLonePairs = ref(moleculeStore.showLonePairs)
 const showBondAngles = ref(moleculeStore.showBondAngles)
 const renderMode = ref(moleculeStore.renderMode)
-const autoRotate = ref(false)
+const autoRotate = ref(true) // 默认开启自动旋转
 
 // 定义 emits
 const emit = defineEmits<{
@@ -127,14 +127,15 @@ const handleAutoRotate = () => {
   width: 300px;
   max-height: calc(100vh - 40px);
   overflow-y: auto;
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(20, 20, 20, 0.95);
   backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .controls-panel h3 {
   margin: 0;
   font-size: 18px;
-  color: #303133;
+  color: #ffffff;
 }
 
 .controls-content {
@@ -151,7 +152,7 @@ const handleAutoRotate = () => {
 
 .section-label {
   font-weight: 600;
-  color: #606266;
+  color: #cccccc;
   font-size: 14px;
   margin-bottom: 4px;
 }
@@ -181,7 +182,7 @@ const handleAutoRotate = () => {
 }
 
 :deep(.el-switch__label) {
-  color: #606266;
+  color: #cccccc;
   font-weight: 500;
 }
 
@@ -189,6 +190,10 @@ const handleAutoRotate = () => {
   display: flex;
   align-items: center;
   margin-bottom: 8px;
+}
+
+:deep(.el-radio__label) {
+  color: #cccccc;
 }
 
 .button-group {
@@ -204,9 +209,16 @@ const handleAutoRotate = () => {
 :deep(.el-card__header) {
   padding: 16px 20px;
   border-bottom: 2px solid #409eff;
+  background: rgba(30, 30, 30, 0.8);
 }
 
 :deep(.el-divider) {
   margin: 16px 0;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+:deep(.el-divider__text) {
+  background-color: rgba(20, 20, 20, 0.95);
+  color: #409eff;
 }
 </style>

@@ -62,8 +62,7 @@ const handleResetView = () => {
 
 // 自动旋转
 const handleAutoRotate = (enabled: boolean) => {
-  // 这个功能可以后续实现
-  console.log('Auto rotate:', enabled)
+  viewerRef.value?.setAutoRotate(enabled)
 }
 </script>
 
@@ -73,16 +72,17 @@ const handleAutoRotate = (enabled: boolean) => {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #000000;
   overflow: hidden;
 }
 
 .app-header {
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(20, 20, 20, 0.98);
   backdrop-filter: blur(10px);
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
-  padding: 16px 24px;
+  box-shadow: 0 2px 12px rgba(255, 255, 255, 0.05);
+  padding: 12px 20px;
   z-index: 100;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .header-content {
@@ -92,30 +92,32 @@ const handleAutoRotate = (enabled: boolean) => {
 
 .app-title {
   margin: 0;
-  font-size: 28px;
-  color: #303133;
+  font-size: 24px;
+  color: #ffffff;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   font-weight: 700;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .icon {
-  font-size: 32px;
+  font-size: 28px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
 }
 
 .app-subtitle {
-  margin: 4px 0 0 44px;
-  font-size: 14px;
-  color: #909399;
+  margin: 2px 0 0 38px;
+  font-size: 13px;
+  color: #aaaaaa;
   font-weight: 400;
 }
 
 .main-content {
   flex: 1;
   display: flex;
-  gap: 20px;
-  padding: 20px;
+  gap: 16px;
+  padding: 16px;
   overflow: hidden;
   max-width: 1800px;
   margin: 0 auto;
@@ -130,22 +132,23 @@ const handleAutoRotate = (enabled: boolean) => {
 .viewer-area {
   flex: 1;
   position: relative;
-  border-radius: 12px;
+  border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-  background: white;
+  box-shadow: 0 8px 32px rgba(255, 255, 255, 0.05);
+  background: #0a0a0a;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .mobile-hint {
   display: none;
 }
 
-/* 响应式设计 */
+/* 平板优化 */
 @media (max-width: 1200px) {
   .main-content {
     flex-direction: column;
-    gap: 12px;
-    padding: 12px;
+    gap: 10px;
+    padding: 10px;
   }
 
   .left-panel,
@@ -155,13 +158,13 @@ const handleAutoRotate = (enabled: boolean) => {
   }
 
   .viewer-area {
-    height: 400px;
+    height: 50vh;
+    min-height: 350px;
     order: -1;
   }
 
-  .mobile-hint {
-    display: block;
-    padding: 12px;
+  .app-header {
+    padding: 10px 16px;
   }
 
   .app-title {
@@ -174,17 +177,54 @@ const handleAutoRotate = (enabled: boolean) => {
 
   .app-subtitle {
     font-size: 12px;
-    margin-left: 36px;
+    margin-left: 34px;
   }
 }
 
+/* 手机优化 */
 @media (max-width: 768px) {
   .app-header {
-    padding: 12px 16px;
+    padding: 8px 12px;
   }
 
   .app-title {
     font-size: 18px;
+  }
+
+  .icon {
+    font-size: 22px;
+  }
+
+  .app-subtitle {
+    margin-left: 30px;
+    font-size: 11px;
+  }
+
+  .main-content {
+    padding: 8px;
+    gap: 8px;
+  }
+
+  .viewer-area {
+    height: 45vh;
+    min-height: 300px;
+    border-radius: 6px;
+  }
+
+  .mobile-hint {
+    display: none; /* 隐藏提示，因为已优化移动端 */
+  }
+}
+
+/* 小屏手机优化 */
+@media (max-width: 480px) {
+  .app-header {
+    padding: 6px 10px;
+  }
+
+  .app-title {
+    font-size: 16px;
+    gap: 8px;
   }
 
   .icon {
@@ -193,11 +233,17 @@ const handleAutoRotate = (enabled: boolean) => {
 
   .app-subtitle {
     margin-left: 28px;
-    font-size: 11px;
+    font-size: 10px;
+  }
+
+  .main-content {
+    padding: 6px;
+    gap: 6px;
   }
 
   .viewer-area {
-    height: 300px;
+    height: 40vh;
+    min-height: 250px;
   }
 }
 </style>

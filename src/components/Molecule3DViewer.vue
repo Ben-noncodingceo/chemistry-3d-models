@@ -18,6 +18,7 @@ let renderer: THREE.WebGLRenderer
 let controls: OrbitControls
 let moleculeGroup: THREE.Group | null = null
 let animationId: number
+let autoRotateEnabled = ref(true) // 默认开启自动旋转
 
 // 初始化Three.js场景
 const initScene = () => {
@@ -25,7 +26,7 @@ const initScene = () => {
 
   // 创建场景
   scene = new THREE.Scene()
-  scene.background = new THREE.Color(0xf5f5f5)
+  scene.background = new THREE.Color(0x000000) // 纯黑色背景
 
   // 创建相机
   const width = containerRef.value.clientWidth
@@ -47,6 +48,8 @@ const initScene = () => {
   controls.minDistance = 3
   controls.maxDistance = 50
   controls.enablePan = true
+  controls.autoRotate = true // 启用自动旋转
+  controls.autoRotateSpeed = 0.5 // 1分钟转一圈：360度/60秒 ≈ 6度/秒，OrbitControls的速度参数约为0.5
 
   // 添加光源
   const ambientLight = new THREE.AmbientLight(0xffffff, 0.6)
@@ -59,11 +62,6 @@ const initScene = () => {
   const directionalLight2 = new THREE.DirectionalLight(0xffffff, 0.4)
   directionalLight2.position.set(-5, -5, -5)
   scene.add(directionalLight2)
-
-  // 添加网格辅助
-  const gridHelper = new THREE.GridHelper(20, 20, 0xcccccc, 0xeeeeee)
-  gridHelper.position.y = -5
-  scene.add(gridHelper)
 
   // 启动动画循环
   animate()
@@ -216,7 +214,15 @@ watch(
   }
 )
 
-// 暴露重置视角方法
+// 设置自动旋转
+const setAutoRotate = (enabled: boolean) => {
+  autoRotateEnabled.value = enabled
+  if (controls) {
+    controls.autoRotate = enabled
+  }
+}
+
+// 暴露方法
 defineExpose({
   resetView: () => {
     if (moleculeStore.currentMolecule) {
@@ -226,7 +232,8 @@ defineExpose({
       controls.target.set(0, 0, 0)
       controls.update()
     }
-  }
+  },
+  setAutoRotate
 })
 </script>
 
